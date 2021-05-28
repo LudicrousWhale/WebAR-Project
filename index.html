@@ -18,13 +18,28 @@
         }
 
         button {
-            display: block;
-            width: 20px;
-            height: 20px;
+            animation: blink 1s;
+            animation-iteration-count: infinite;
+            background-color: lightblue;
             border-radius: 10px;
             border: none;
-            background-color: blue;
-            box-sizing: border-box;
+        }
+
+        .classname {
+            height: max-content;
+            width: max-content;
+        }
+
+        @keyframes blink {
+            0% {
+                width: 0;
+                height: 0;
+                
+            }
+            100% {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         model-viewer {
@@ -33,17 +48,36 @@
             background-color: burlywood;
         }
 
-        /* button[slot="hotspot-hand"] {
+        button[slot="hotspot-1"]:not([data-visible]) {
             --min-hotspot-opacity: 0;
-            background-color: red;
-        } */
+            background-color: lightblue;
+        }
+
+
+        button[slot="hotspot-2"]:not([data-visible]) {
+            --min-hotspot-opacity: 0;
+            background-color: lightblue;
+        }
+
+        button[slot="hotspot-3"]:not([data-visible]) {
+            --min-hotspot-opacity: 0;
+            background-color: lightblue;
+        }
+
+        /* hides the element whose classList contains "hide" */
+        .hide {
+            display: none;
+        }
+
+
 
         #annotation {
-            background-color: #888888;
+            background-color: lightblue;
             position: absolute;
             transform: translate(10px, 10px);
             border-radius: 10px;
             padding: 10px;
+            margin: 10px;
         }
 
         /* This keeps child nodes hidden while the element loads */
@@ -56,34 +90,49 @@
 </head>
 
 <body>
-    <model-viewer src="./assets/archive/DamagedHelmet.glb" camera-controls auto-rotate ar
+    <model-viewer src="./assets/archive/DamagedHelmet.glb" camera-controls ar
         ios-src="./assets/archive/DamagedHelmet.usdz">
 
-        <!-- hotspot -->
-        <button slot="hotspot-hand" data-position="-0.9393967975218693m -0.009125509295188858m -0.5773430879055309m"
+        <!-- hotspot 1-->
+        <button slot="hotspot-1" class="hot-1"
+            data-position="-0.9393967975218693m -0.009125509295188858m -0.5773430879055309m"
             data-normal="-0.969876840306427m -0.22623912509384256m -0.0903037812829253m"
             data-visibility-attribute="visible">
-            <iframe id="annotation" src="https://www.youtube.com/embed/J2npVg9ONFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- video player -->
+            <iframe id="annotation" class="hot1-frame hide" src="https://www.youtube.com/embed/J2npVg9ONFo"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
         </button>
 
-        <button slot="hotspot2" data-position="0.003956061153326196m 0.20019727007550916m 0.6056666696640666m"
-            data-normal="0.09710511290813043m 0.408756644659472m 0.9074627278813326m"
+        <!-- hotspot 2 -->
+        <button slot="hotspot-2" class="hot-2" data-position="0.31164040034754803m 0.16411376503017594m -1.0448584636862155m"
+            data-normal="0.6086624893004073m -0.3653202887401862m -0.704323122404354m"
             data-visibility-attribute="visible">
-            <iframe id="annotation" src="https://www.youtube.com/embed/qGiPZf7njqY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- video player -->
+            <iframe id="annotation" class="hot2-frame hide" src="https://www.youtube.com/embed/qGiPZf7njqY"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
         </button>
 
-        <button slot="hotspot" data-position="0.002472759028882665m -0.7154531386770488m 0.8086258162906395m"
-            data-normal="0m -0.2605726131253068m 0.9654542523025363m"
-            data-visibility-attribute="visible">
-            <div id="annotation">Respiratory filters</div>
+        <!-- hotspot 3 -->
+        <button slot="hotspot-3" class="hot-3"
+            data-position="0.002472759028882665m -0.7154531386770488m 0.8086258162906395m"
+            data-normal="0m -0.2605726131253068m 0.9654542523025363m" data-visibility-attribute="visible" type="button">
+            <div id="annotation" class="hot3-text hide">Respiratory filters</div>
         </button>
+        
 
+        <!-- imported local script file -->
+        <script src="./index.js"></script>
     </model-viewer>
 </body>
 
 </html>
 
 
+<!-- ignore from here -->
 <!-- <button slot="hotspot-1" class="hotspot selected" data-position="-0.9393967975218693m -0.009125509295188858m -0.5773430879055309m" data-normal="-0.969876840306427m -0.22623912509384256m -0.0903037812829253m"><div class="annotation">data-position:
     -0.9393967975218693m -0.009125509295188858m -0.5773430879055309m
     data-normal:
@@ -104,3 +153,8 @@ data-normal="0m -0.2605726131253068m 0.9654542523025363m"><div class="annotation
     0.003956061153326196m 0.20019727007550916m 0.6056666696640666m
     data-normal:
     0.09710511290813043m 0.408756644659472m 0.9074627278813326m</div></button> -->
+
+<!-- <button slot="hotspot-1" class="hotspot selected" data-position="0.31164040034754803m 0.16411376503017594m -1.0448584636862155m" data-normal="0.6086624893004073m -0.3653202887401862m -0.704323122404354m"><div class="annotation">data-position:
+    0.31164040034754803m 0.16411376503017594m -1.0448584636862155m
+    data-normal:
+    0.6086624893004073m -0.3653202887401862m -0.704323122404354m</div></button> -->
